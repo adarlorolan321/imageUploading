@@ -11,4 +11,9 @@ export default [
         icon: { icon: 'mdi-file-upload-outline' },
         to: 'admin.dashboard.index',
     },
+    {
+        title: 'Users',
+        icon: { icon: 'mdi-file-upload-outline' },
+        to: 'admin.users.index',
+    },
 ];

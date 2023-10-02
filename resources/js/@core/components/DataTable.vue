@@ -21,7 +21,7 @@
 
 <template>
   <VCard>
-    <VCardText>
+    <VCardText class="border-b">
       <VRow justify="space-between">
         <VCol md="4">
           <VRow align="center">
@@ -40,7 +40,7 @@
             </VCol>
           </VRow>
         </VCol>
-        <VCol md="4">
+        <VCol lg="3">
           <VTextField
             v-model="formParams.query"
             placeholder="Search"
@@ -123,13 +123,15 @@
         </tr>
       </tbody>
     </VTable>
-    <VCardText>
+    <VCardText class="border-t">
       <VRow>
         <VCol>
           {{ pagination.entries }}
         </VCol>
         <VCol>
-          <VPagination :length="2" v-model="pagination.currentPage" @update:model-value="($event) => handleSearch({page: $event})" />
+          <div>
+            <VPagination :length="pagination.last_page" v-model="pagination.currentPage" @update:model-value="($event) => handleSearch({page: $event})" />
+          </div>
         </VCol>
       </VRow>
     </VCardText>
@@ -204,5 +206,9 @@ td, th {
     margin-top: 1rem;
     
   }
+}
+
+:deep(.v-pagination__list) {
+  justify-content: flex-end !important;
 }
 </style>

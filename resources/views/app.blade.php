@@ -22,6 +22,12 @@
     @vite(['resources/js/app.js', "resources/js/pages/{$page['component']}.vue"])
 
     @inertiaHead
+
+    <style>
+        #loading-bg {
+            z-index: 999999;
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased">
