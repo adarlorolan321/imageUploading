@@ -13,6 +13,8 @@ import ability from '@/plugins/casl/ability'
 import i18n from '@/plugins/i18n'
 import layoutsPlugin from '@/plugins/layouts'
 import vuetify from '@/plugins/vuetify'
+import '@/plugins/icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { loadFonts } from '@/plugins/webfontloader'
 import router from '@/router'
 import { abilitiesPlugin } from '@casl/vue'
@@ -54,6 +56,7 @@ createInertiaApp({
             .use(createPinia())
             .use(layoutsPlugin)
             .use(TableHeader)
+            .component('FontAwesomeIcon', FontAwesomeIcon)
             .use(i18n)
             .mixin({ methods: { can, fieldHasError, clearSelect, goBack } })
             .use(abilitiesPlugin, ability, {

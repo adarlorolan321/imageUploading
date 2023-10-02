@@ -1,12 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\CaseStudyController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\SurveyController as AdminSurveyController;
-use App\Http\Controllers\Admin\SurveyQuestionController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\SurveyController;
-use App\Models\Survey;
+use App\Http\Controllers\Admin as AdminController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -31,6 +26,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/', function(){
             return Inertia::render('admin/dashboard');
         })->name('dashboard.index');
+
+        Route::resources([
+            'users' => AdminController\UserController::class
+        ]);
     });
 });
 

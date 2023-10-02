@@ -24,6 +24,7 @@ declare module '@vue/runtime-core' {
     CardStatisticsVerticalSimple: typeof import('./resources/js/@core/components/CardStatisticsVerticalSimple.vue')['default']
     ConfirmDialog: typeof import('./resources/js/@core/components/ConfirmDialog.vue')['default']
     CustomizerSection: typeof import('./resources/js/@core/components/CustomizerSection.vue')['default']
+    DataTable: typeof import('./resources/js/@core/components/DataTable.vue')['default']
     DialogCloseBtn: typeof import('./resources/js/@core/components/DialogCloseBtn.vue')['default']
     Dropzone: typeof import('./resources/js/@core/components/Dropzone.vue')['default']
     EditAddressDialog: typeof import('./resources/js/@core/components/EditAddressDialog.vue')['default']

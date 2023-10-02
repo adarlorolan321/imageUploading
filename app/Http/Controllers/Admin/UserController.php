@@ -22,11 +22,10 @@ class UserController extends Controller
     public function index(Request $request, $role = null)
     {
 
-        $page = $request->input('page', 1); // default 1
-        $perPage = $request->input('perPage', 50); // default 50
-        $queryString = str_replace(['%', '_'], ['\\%', '\\_'], $request->input('query', null));
-        $sort = explode('.', $request->input('sort', 'first_name'));
-        $order = $request->input('order', 'asc');
+        $queryString = $request->input('query', null);
+        $sortBy = $request->input('sort', 'created_at');
+        $orderBy = $request->input('order', 'desc');
+        $perPage = $request->input('perPage');
 
         $data = User::query()
             ->with([])
@@ -37,14 +36,14 @@ class UserController extends Controller
                         ->orWhere('last_name', 'like', '%' . $queryString . '%');
                 }
             })
-            ->when(count($sort) == 1, function ($query) use ($sort, $order) {
-                $query->orderBy($sort[0], $order);
+            ->when($sortBy && $orderBy, function($query) use ($sortBy, $orderBy) {
+                $query->orderBy($sortBy, $orderBy);
             })
             ->paginate($perPage)
             ->withQueryString();
 
         $props = [
-            'data' => UserListResource::collection($data),
+            'data' => $data,
             'params' => $request->all(),
         ];
 
@@ -68,8 +67,6 @@ class UserController extends Controller
         $password = $this->randomPassword();
         $data = User::create(array_merge($request->validated(), ['password' => bcrypt($password)]));
         $data->assignRole('Admin');
-
-        Mail::to($data->email)->queue(new UserWelcomeEmail($data->first_name, $data->email, $password));
 
         if ($request->wantsJson()) {
             return new UserListResource($data);

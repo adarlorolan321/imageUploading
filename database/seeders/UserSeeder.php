@@ -19,6 +19,12 @@ class UserSeeder extends Seeder
                 'last_name' => 'Admin',
                 'email' => 'super@admin.com',
                 'password' => bcrypt('password'),
+            ], 
+            [
+                'first_name' => 'Admin',
+                'last_name' => 'Admin',
+                'email' => 'admin@admin.com',
+                'password' => bcrypt('password'),
             ],
         ];
         foreach($users as $user) {
