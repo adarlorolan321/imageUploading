@@ -43,5 +43,12 @@ class RolePermissionSeeder extends Seeder
         if (!is_null($admin)) {
             $admin->assignRole('Admin'); // ADMIN
         }
+
+        
+        // ASSIGN SUPER ADMIN ROLE
+        $admin2 = User::where('email', 'admin@admin.com')->first();
+        if (!is_null($admin)) {
+            $admin2->assignRole('Admin'); // ADMIN
+        }
     }
 }
