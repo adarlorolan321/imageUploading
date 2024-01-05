@@ -32,7 +32,7 @@ css_lint_folder="./resources"
 css_changed_files=$(git diff --cached --name-only --diff-filter=ACM "$css_lint_folder" | grep -E '\.(css|scss|vue)$')
 
 if [ -n "$css_changed_files" ]; then
-    npm run lint:js -- $css_changed_files
+    npm run lint:css -- $css_changed_files
 
     # If lint fails, exit with non-zero status
     if [ $? -ne 0 ]; then
