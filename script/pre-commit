@@ -7,9 +7,9 @@
 #
 # To enable this hook, rename this file to "pre-commit".
 
-echo "Test 1: Checking eslint..."
+echo "Test 1: Checking linting for all changed js|vue files..."
 
-lint_folder="./resources/js"
+lint_folder="./resources"
 
 changed_files=$(git diff --cached --name-only --diff-filter=ACM "$lint_folder" | grep -E '\.(js|vue)$')
 
@@ -23,7 +23,25 @@ if [ -n "$changed_files" ]; then
     fi
 fi
 
-echo "lint hook was successful"
+echo "js|vue lint hook was successful"
+
+echo "Test 2: Checking linting for all changed css|scss|vue files..."
+
+css_lint_folder="./resources"
+
+css_changed_files=$(git diff --cached --name-only --diff-filter=ACM "$css_lint_folder" | grep -E '\.(css|scss|vue)$')
+
+if [ -n "$css_changed_files" ]; then
+    npm run lint:js -- $css_changed_files
+
+    # If lint fails, exit with non-zero status
+    if [ $? -ne 0 ]; then
+        echo "lint hook failed"
+        exit 1
+    fi
+fi
+
+echo "css|scss|vue lint hook was successful"
 
 resources="./resources"
 changed_resources=$(git diff --cached --name-only --diff-filter=ACM "$resources")
