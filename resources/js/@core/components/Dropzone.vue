@@ -5,7 +5,7 @@ import { useDropzone } from "vue3-dropzone";
 const props = defineProps({
   multiple: Boolean,
   accept: String,
-  setFiles: Function
+  setFiles: Function,
 });
 
 const state = reactive({
@@ -28,8 +28,9 @@ function onDrop(acceptFiles, rejectReasons) {
   const files = acceptFiles.map((file) =>
     Object.assign(file, {
       preview: URL.createObjectURL(file),
-    })
+    }),
   );
+
   state.files = [...state.files, ...files];
 }
 
@@ -39,19 +40,22 @@ function handleClickDeleteFile(e, index) {
 }
 
 const iProps = getInputProps();
+
 iProps.accept = props.accept || "*";
 </script>
 
 <template>
   <div>
-    <!-- <div v-if="state.files.length > 0" class="files">
+    <!--
+ <div v-if="state.files.length > 0" class="files">
       <div class="file-item" v-for="(file, index) in state.files" :key="index">
         <span>{{ file.name }}</span>
         <span class="delete-file" @click="handleClickDeleteFile(index)"
           >Delete</span
         >
       </div>
-    </div> -->
+    </div> 
+-->
     <div class="dropzone">
       <VRow>
         <VCol
@@ -77,8 +81,9 @@ iProps.accept = props.accept || "*";
             size="x-small"
             color="error"
             @click="(e) => handleClickDeleteFile(e, index)"
-            >Delete</VBtn
           >
+            Delete
+          </VBtn>
         </VCol>
       </VRow>
       <VRow v-bind="getRootProps()" v-if="multiple || (!multiple && state.files.length == 0)">
@@ -93,7 +98,6 @@ iProps.accept = props.accept || "*";
               <input
                 v-bind="iProps"
                 :accept="accept"
-
               />
               <div>
                 <p v-if="isDragActive" class="dz-message">

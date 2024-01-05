@@ -23,6 +23,7 @@ export default defineComponent({
       isLessThanOverlayNavBreakpoint,
       isNavbarBlurEnabled,
     } = useLayouts();
+
     const isOverlayNavActive = ref(false);
     const isLayoutOverlayVisible = ref(false);
     const toggleIsOverlayNavActive = useToggle(isOverlayNavActive);
@@ -70,7 +71,7 @@ export default defineComponent({
         {
           "nav-header": slots["vertical-nav-header"]?.(),
           "before-nav-items": slots["before-vertical-nav-items"]?.(),
-        }
+        },
       );
 
       // 👉 Navbar
@@ -88,9 +89,9 @@ export default defineComponent({
             { class: "navbar-content-container" },
             slots.navbar?.({
               toggleVerticalOverlayNavActive: toggleIsOverlayNavActive,
-            })
+            }),
           ),
-        ]
+        ],
       );
 
       // 👉 Content area
@@ -113,7 +114,7 @@ export default defineComponent({
       const main = h(
         "main",
         { class: "layout-page-content" },
-        h("div", { class: "page-content-container" }, mainChildren)
+        h("div", { class: "page-content-container" }, mainChildren),
       );
 
       // 👉 Footer
@@ -145,7 +146,7 @@ export default defineComponent({
             : verticalNav,
           h("div", { class: "layout-content-wrapper" }, [navbar, main, footer]),
           layoutOverlay,
-        ]
+        ],
       );
     };
   },

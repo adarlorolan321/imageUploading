@@ -1,6 +1,7 @@
 <script setup>
 import { useSkins } from "@core/composable/useSkins";
 import { useThemeConfig } from "@core/composable/useThemeConfig";
+
 // @layouts plugin
 import { AppContentLayoutNav } from "@layouts/enums";
 import App from "../App.vue";
@@ -39,6 +40,7 @@ const arr = userAbilities.value.map((p) => {
 });
 
 ability.update(arr);
+
 const status = computed(() => usePage().props.status);
 const success = computed(() => usePage().props.success);
 const error = computed(() => usePage().props.error);

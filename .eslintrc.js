@@ -185,6 +185,10 @@ module.exports = {
         "sonarjs/no-nested-template-literals": "off",
         "sonarjs/cognitive-complexity": "off",
         "sonarjs/prefer-single-boolean-return": "off",
+        
+        'vue/valid-v-slot': ['error', {
+            allowModifiers: true,
+        }],
 
         // -- Unicorn
         // 'unicorn/filename-case': 'off',

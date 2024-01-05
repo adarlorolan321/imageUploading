@@ -1,3 +1,4 @@
+/* eslint-disable import/namespace */
 import * as light from './light';
 import * as regular from './regular';
 import * as brand from './brand'

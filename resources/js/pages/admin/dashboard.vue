@@ -4,7 +4,6 @@ import Layout from "@/layouts/default.vue";
 import AppComingSoon from "@core/components/AppComingSoon.vue";
 
 defineOptions({ layout: Layout });
-
 </script>
 
 <template>

@@ -56,7 +56,8 @@ export const isNavLinkActive = (link, router) => {
   // })
 
   console.log(route().current(), link.to)
-  return route().current() == link.to;
+  
+return route().current() == link.to;
 }
 
 /**

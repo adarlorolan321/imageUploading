@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+#
+# To enable this hook, rename this file to "pre-commit".
+
+echo "Test 1: Checking eslint..."
+
+lint_folder="./resources/js"
+
+changed_files=$(git diff --cached --name-only --diff-filter=ACM "$lint_folder")
+
+if [ -n "$changed_files" ]; then
+    npm run lint -- $changed_files
+
+    # If lint fails, exit with non-zero status
+    if [ $? -ne 0 ]; then
+        echo "lint hook failed"
+        exit 1
+    fi
+fi
+
+echo "lint hook was successful"
+
+resources="./resources"
+changed_resources=$(git diff --cached --name-only --diff-filter=ACM "$resources")
+
+
+if [ -n "$changed_resources" ]; then
+    echo "Test 2: Building Project..."
+    npm run build
+    if [ $? -ne 0 ]; then
+        echo "project build hook failed"
+        exit 1
+    fi
+    echo "link hook was successful"
+fi
+

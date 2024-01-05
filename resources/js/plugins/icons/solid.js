@@ -23,5 +23,5 @@ export {
     faVideo,
     faClipboardList,
     faFlask,
-    faKey
+    faKey,
 } from "@fortawesome/pro-solid-svg-icons";

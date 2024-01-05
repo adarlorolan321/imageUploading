@@ -25,6 +25,6 @@ export {
     faArrowRight,
     faCommentsQuestionCheck,
     faFileExcel,
-    faChevronDoubleRight
+    faChevronDoubleRight,
    
 } from '@fortawesome/pro-light-svg-icons';

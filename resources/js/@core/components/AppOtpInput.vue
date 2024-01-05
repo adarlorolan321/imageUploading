@@ -34,6 +34,7 @@ const handleKeyDown = (event, index) => {
     if (refOtpComp.value !== null && index > 1) {
       const inputEl =
         refOtpComp.value.children[index - 2].querySelector("input");
+
       if (inputEl) inputEl.focus();
     }
   }

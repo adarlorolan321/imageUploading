@@ -15,8 +15,6 @@ import { HorizontalNavLayout } from '@layouts'
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 
 const { appRouteTransition } = useThemeConfig();
-
-
 </script>
 
 <template>

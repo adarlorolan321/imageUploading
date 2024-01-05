@@ -74,7 +74,7 @@ const onCancel = () => {
           variant="tonal"
           @click="onCancel"
         >
-          {{ props.cancelButtonText || 'No'}}
+          {{ props.cancelButtonText || 'No' }}
         </VBtn>
 
         <VBtn

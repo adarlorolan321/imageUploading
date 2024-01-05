@@ -10,7 +10,9 @@ defineOptions({ layout: Layout });
 
 const authThemeMask = useGenerateImageVariant(miscMaskLight, miscMaskDark);
 const props = defineProps({ code: Number })
+
 console.log(props.code)
+
 const title = computed(() => {
   return {
     503: '503: Service Unavailable',

@@ -19,6 +19,7 @@ const { appRouteTransition, isLessThanOverlayNavBreakpoint } = useThemeConfig();
 const { width: windowWidth } = useWindowSize();
 
 const user = computed(() => usePage().props.auth.user);
+
 // const role = user.value.roles.length > 0 ? user.value.roles[0] : "";
 
 // let updatedNavItems = [];
@@ -36,8 +37,10 @@ const user = computed(() => usePage().props.auth.user);
     <!-- 👉 navbar -->
     <template #navbar="{ toggleVerticalOverlayNavActive }">
       <div class="d-flex h-100 align-center">
-        <VBtn v-if="isLessThanOverlayNavBreakpoint(windowWidth)" icon variant="text" color="default" class="ms-n3"
-          size="small" @click="toggleVerticalOverlayNavActive(true)">
+        <VBtn
+          v-if="isLessThanOverlayNavBreakpoint(windowWidth)" icon variant="text" color="default" class="ms-n3"
+          size="small" @click="toggleVerticalOverlayNavActive(true)"
+        >
           <VIcon icon="tabler-menu-2" size="24" />
         </VBtn>
 

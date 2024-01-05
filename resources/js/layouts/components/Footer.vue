@@ -4,7 +4,8 @@
     <span class="d-flex align-center">
       &copy;
       {{ new Date().getFullYear() }}
-      <!-- Made With
+      <!--
+ Made With
       <VIcon
         icon="tabler-heart"
         color="error"
@@ -16,11 +17,13 @@
         target="_blank"
         rel="noopener noreferrer"
         class="text-primary ms-1"
-      >Pixinvent</a> -->
+      >Pixinvent</a> 
+-->
     </span>
     <!-- 👉 Footer: right content -->
     <span class="d-md-flex gap-x-4 text-primary d-none">
-      <!-- <a
+      <!--
+ <a
         href="https://themeforest.net/licenses/standard"
         target="noopener noreferrer"
       >License</a>
@@ -31,7 +34,8 @@
       <a
         href="https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/documentation/"
         target="noopener noreferrer"
-      >Documentation</a> -->
+      >Documentation</a> 
+-->
     </span>
   </div>
 </template>
