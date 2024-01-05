@@ -1,10 +1,12 @@
 {
     "extends": [
+        "stylelint-scss",
+        "stylelint-config-standard-scss",
         "stylelint-config-recommended-vue",
-        "stylelint-config-recommended-scss",
-        "stylelint-scss"
     ],
     "rules": {
-        "at-rule-no-unknown": null
+        "at-rule-no-unknown": null,
+        "selector-class-pattern": null,
+        "max-line-length": null
     }
   }
