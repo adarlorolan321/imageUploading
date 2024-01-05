@@ -140,71 +140,82 @@
 
 <style lang="scss" scoped>
 .sortable {
-    cursor: pointer;
+  cursor: pointer;
 }
+
 .data-header {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
 }
+
 .sort-active {
-    background-color: rgba(0,0,0,0.05);
+  background-color: rgb(0 0 0 / 5%);
 }
+
 th {
-    text-transform: uppercase !important;
-    font-size: 0.8rem;
+  font-size: 0.8rem;
+  text-transform: uppercase !important;
 }
-td, th {
-    white-space: pre-wrap;
-    padding: 0.5rem 0.75rem !important;
+
+td,
+th {
+  padding: 0.5rem 0.75rem !important;
+  white-space: pre-wrap;
 }
 
 .dt-table {
   .dt-mobile-header {
     display: none;
   }
+
   @media screen and (max-width: 767px) {
     border-top: unset !important;
+
     thead {
       display: none;
     }
+
     .dt-mobile-header {
-      font-size: 14px;
       display: block;
+      font-size: 14px;
       text-align: left !important;
     }
+
     tbody {
       display: flex;
       flex-direction: column;
+      border-width: 0;
       row-gap: 1rem;
-      border-width: 0px;
     }
+
     .dt-row {
       display: block;
       border-radius: 1rem;
       background-color: #fff;
     }
+
     .dt-content {
       display: grid;
-      grid-template-columns: 25% 1fr;
       width: 100% !important;
+      grid-template-columns: 25% 1fr;
     }
   }
 }
 
-@media screen and (max-width: 767px) { 
+@media screen and (max-width: 767px) {
   .card {
     background-color: transparent;
     box-shadow: unset;
-  }  
+  }
+
   .card-body {
     border: unset !important;
-    background-color: #fff;
     border-radius: 1rem;
-    margin-bottom: 1rem;
     margin-top: 1rem;
-    
+    margin-bottom: 1rem;
+    background-color: #fff;
   }
 }
 

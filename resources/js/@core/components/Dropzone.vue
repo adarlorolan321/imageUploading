@@ -126,48 +126,46 @@ iProps.accept = props.accept || "*";
 
 .dropzone,
 .files {
-  border: 2px dashed #dbdade;
   min-height: 300px;
+  border: 2px dashed #dbdade;
 }
 
 .dz-message {
-  color: #5d596c;
   margin: 8rem 0 3rem;
+  color: #5d596c;
+  font-size: 1.625rem;
   font-weight: 500;
   text-align: center;
-  font-size: 1.625rem;
 }
-
-.dz-message:before {
+.dz-message::before {
+  background: rgb(75 70 92 / 8%);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-upload' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='%235d596c' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2' /%3E%3Cpolyline points='7 9 12 4 17 9' /%3E%3Cline x1='12' y1='4' x2='12' y2='16' /%3E%3C/svg%3E") !important;
-  background: rgba(75, 70, 92, 0.08);
-}
-
-.dz-message:before {
-  content: "";
-  border-radius: 8px;
   position: absolute;
   top: -4rem;
   left: calc(50% - 22px);
   display: inline-block;
-  height: 48px;
   width: 48px;
-  background-repeat: no-repeat !important;
+  height: 48px;
+  border-radius: 8px;
   background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "";
 }
+
 .dz-filename {
-  width: 100%;
   overflow: hidden;
-  padding: 0.625rem 0.625rem 0 0.625rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.dropzone {
   width: 100%;
+  padding: 0.625rem 0.625rem 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropzone {
   position: relative;
+  width: 100%;
   padding: 1.5rem;
-  cursor: pointer;
   border-radius: 0.5rem;
+  cursor: pointer;
 }
 
 .dz-details {

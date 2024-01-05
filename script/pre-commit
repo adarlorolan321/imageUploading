@@ -11,10 +11,10 @@ echo "Test 1: Checking eslint..."
 
 lint_folder="./resources/js"
 
-changed_files=$(git diff --cached --name-only --diff-filter=ACM "$lint_folder")
+changed_files=$(git diff --cached --name-only --diff-filter=ACM "$lint_folder" | grep -E '\.(js|vue)$')
 
 if [ -n "$changed_files" ]; then
-    npm run lint -- $changed_files
+    npm run lint:js -- $changed_files
 
     # If lint fails, exit with non-zero status
     if [ $? -ne 0 ]; then

@@ -174,9 +174,9 @@ console.log({ ...inputProps, ...rootAttrs })
   padding-inline: var(--v-field-padding-start);
 }
 
-$heading-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
-$body-color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity));
-$disabled-color: rgba(var(--v-theme-on-background), var(--v-disabled-opacity));
+$heading-color: rgb(var(--v-theme-on-background) var(--v-high-emphasis-opacity));
+$body-color: rgb(var(--v-theme-on-background) var(--v-medium-emphasis-opacity));
+$disabled-color: rgb(var(--v-theme-on-background) var(--v-disabled-opacity));
 
 // hide the input when your picker is inline
 input[altinputclass="inlinePicker"] {
@@ -236,7 +236,7 @@ input[altinputclass="inlinePicker"] {
     &.inRange,
     &.inRange:hover {
       border: none;
-      background: rgba(var(--v-theme-primary), 0.1) !important;
+      background: rgb(var(--v-theme-primary) 0.1) !important;
       box-shadow: none !important;
       color: rgb(var(--v-theme-primary));
     }
@@ -271,8 +271,8 @@ input[altinputclass="inlinePicker"] {
     }
 
     &:hover {
-      border-color: rgba(var(--v-theme-surface-variant), var(--v-hover-opacity));
-      background: rgba(var(--v-theme-surface-variant), var(--v-hover-opacity));
+      border-color: rgb(var(--v-theme-surface-variant) var(--v-hover-opacity));
+      background: rgb(var(--v-theme-surface-variant) var(--v-hover-opacity));
     }
   }
 
@@ -292,7 +292,7 @@ input[altinputclass="inlinePicker"] {
   }
 
   .flatpickr-months {
-    border-block-end: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
+    border-block-end: 1px solid rgb(var(--v-border-color) var(--v-border-opacity));
 
     .flatpickr-prev-month,
     .flatpickr-next-month {
@@ -315,7 +315,7 @@ input[altinputclass="inlinePicker"] {
 
   &.hasTime.open {
     .flatpickr-time {
-      border-color: rgba(var(--v-border-color), var(--v-border-opacity));
+      border-color: rgb(var(--v-border-color) var(--v-border-opacity));
       block-size: auto;
     }
   }
@@ -403,7 +403,7 @@ input[altinputclass="inlinePicker"] {
 
 // removing box shadow of calendar in dark and added a border
 .v-theme--dark.flatpickr-calendar {
-  border: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
+  border: 1px solid rgb(var(--v-border-color) var(--v-border-opacity));
   box-shadow: none;
 }
 
@@ -413,9 +413,9 @@ input[altinputclass="inlinePicker"] {
 
   .flatpickr-prev-month,
   .flatpickr-next-month {
-    background: rgba(var(--v-theme-surface-variant), var(--v-selected-opacity));
-    block-size: 1.75rem;
     border-radius: 5rem;
+    background: rgb(var(--v-theme-surface-variant) var(--v-selected-opacity));
+    block-size: 1.75rem;
     inline-size: 1.75rem;
     inset-block-start: 0.75rem !important;
     padding-block: 0.25rem;

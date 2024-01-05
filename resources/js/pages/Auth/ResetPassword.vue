@@ -169,5 +169,5 @@ const submit = d => {
 </template>
 
 <style lang="scss">
-@use '@core-scss/template/pages/page-auth.scss';
+@use "@core-scss/template/pages/page-auth.scss";
 </style>

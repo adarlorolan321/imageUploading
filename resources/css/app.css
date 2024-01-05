@@ -1,27 +1,34 @@
 .v-progress-linear__background {
-    border-radius: 20px !important;
+  border-radius: 20px !important;
 }
+
 .v-progress-linear__determinate {
-    border-radius: 20px !important;
-    background: linear-gradient(to right, #c9eff5, #13ACC2) !important;
+  border-radius: 20px !important;
+  background: linear-gradient(to right, #c9eff5, #13acc2) !important;
 }
+
 .text-primary {
-    color: #425AA0;
+  color: #425aa0;
 }
+
 @media (max-width: 960px) {
-    .v-label {
-        font-size: 12px !important;
-    }
-    .v-table>.v-table__wrapper>table>tbody>tr>td {
-        font-size: 12px !important;
-    }
-    .v-field__input {
-        font-size: 12px !important;
-    }
-    .v-slider-track__tick-label {
-       display: none !important;
-    }
-    .v-btn__content {
-        font-size: 12px !important;
-    }
+  .v-label {
+    font-size: 12px !important;
+  }
+
+  .v-table > .v-table__wrapper > table > tbody > tr > td {
+    font-size: 12px !important;
+  }
+
+  .v-field__input {
+    font-size: 12px !important;
+  }
+
+  .v-slider-track__tick-label {
+    display: none !important;
+  }
+
+  .v-btn__content {
+    font-size: 12px !important;
+  }
 }

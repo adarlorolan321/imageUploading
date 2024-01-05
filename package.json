@@ -4,7 +4,10 @@
         "dev": "vite --host",
         "build": "vite build",
         "preview": "vite preview --port 5050",
-        "lint": "eslint .eslintrc.js --fix --ext .ts,.js,.vue,.tsx,.jsx --max-warnings=0",
+
+        "lint:js": "eslint .eslintrc.js --fix --ext .ts,.js,.vue,.tsx,.jsx --max-warnings=0",
+        "lint:css": "stylelint resources/**/*.{vue,css} --fix --max-warnings=0",
+        
         "build:icons": "node resources/js/@iconify/build-icons.js"
     },
     "dependencies": {
@@ -86,6 +89,7 @@
         "postcss-html": "^1.5.0",
         "stylelint": "^14.15.0",
         "stylelint-config-idiomatic-order": "^9.0.0",
+        "stylelint-config-recommended-vue": "^1.5.0",
         "stylelint-config-standard-scss": "^6.1.0",
         "stylelint-use-logical-spec": "^4.1.0",
         "tailwindcss": "^3.2.1",

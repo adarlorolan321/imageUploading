@@ -29,7 +29,7 @@ module.exports = {
         ecmaVersion: 13,
         sourceType: "module",
     },
-    plugins: ["vue"],
+    plugins: [ "vue"],
     ignorePatterns: [
         "resources/js/@iconify/*.js",
         "node_modules",

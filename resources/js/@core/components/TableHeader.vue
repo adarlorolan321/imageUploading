@@ -25,7 +25,7 @@
 </template>
 
 <style scoped>
-.sortable{
+.sortable {
   cursor: pointer;
 }
 </style>
