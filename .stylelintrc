@@ -1,13 +1,20 @@
 {
-    "extends": [
-        "stylelint-scss",
-        "stylelint-config-standard-scss",
-        "stylelint-config-recommended-vue",
-    ],
+    "extends": ["stylelint-config-standard"],
     "rules": {
-        "at-rule-no-unknown": null,
-        "selector-class-pattern": null,
-        "max-line-length": null,
-        "no-descending-specificity": null
-    }
+      "at-rule-no-unknown": null,
+      "selector-class-pattern": null,
+      "max-line-length": null,
+      "no-descending-specificity": null
+    },
+    "overrides": [
+      {
+        "files": ["*.scss", "**/*.scss"],
+        "extends": ["stylelint-config-standard-scss"]
+      },
+      {
+        "files": ["*.vue", "**/*.vue"],
+        "extends": ["stylelint-config-standard-scss", "stylelint-config-standard-vue/scss"]
+      }
+    ]
   }
+  
