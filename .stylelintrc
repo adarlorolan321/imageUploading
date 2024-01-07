@@ -3,17 +3,20 @@
     "rules": {
       "at-rule-no-unknown": null,
       "selector-class-pattern": null,
+      "declaration-colon-newline-after": null,
+      "declaration-empty-line-before": null, 
       "max-line-length": null,
-      "no-descending-specificity": null
+      "no-descending-specificity": null,
+      "color-function-notation": null
     },
     "overrides": [
       {
         "files": ["*.scss", "**/*.scss"],
-        "extends": ["stylelint-config-standard-scss"]
+        "extends": ["stylelint-config-standard-scss"],
       },
       {
         "files": ["*.vue", "**/*.vue"],
-        "extends": ["stylelint-config-standard-scss", "stylelint-config-standard-vue/scss"]
+        "extends": ["stylelint-config-standard-scss", "stylelint-config-standard-vue/scss"],
       }
     ]
   }
