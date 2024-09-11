@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin as AdminController;
+use App\Http\Controllers\SampleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,12 @@ use Inertia\Inertia;
 |
 */
 
-Route::redirect('/', '/admin');
+Route::redirect('/', '/sample');
+
+Route::resource('/sample', SampleController::class);
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function(){

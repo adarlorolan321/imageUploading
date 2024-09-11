@@ -1,179 +1,163 @@
 <script setup>
-import { reactive, watch } from "vue";
-import { useDropzone } from "vue3-dropzone";
+import { useDropZone, useFileDialog, useObjectUrl } from "@vueuse/core";
+
+const dropZoneRef = ref();
+const { open, files } = useFileDialog({ accept: "image/*" });
 
 const props = defineProps({
-  multiple: Boolean,
-  accept: String,
-  setFiles: Function,
+  modelValue: {
+    type: Array,
+    default: () => [],
+  },
 });
 
-const state = reactive({
-  files: [],
+const emit = defineEmits(["update:modelValue", "closeModal", "clearData"]);
+
+const fileData = computed({
+  get: () => props.modelValue,
+  set: (val) => {
+    emit("update:modelValue", val);
+  },
 });
 
-const { getRootProps, getInputProps, isDragActive, ...rest } = useDropzone({
-  onDrop,
-});
+const errorMessage = ref(null);
 
-watch(state, () => {
-  props.setFiles(state.files)
-});
-
-watch(isDragActive, () => {
-  console.log("isDragActive", isDragActive.value, rest);
-});
-
-function onDrop(acceptFiles, rejectReasons) {
-  const files = acceptFiles.map((file) =>
-    Object.assign(file, {
-      preview: URL.createObjectURL(file),
-    }),
-  );
-
-  state.files = [...state.files, ...files];
+function onDrop(DroppedFiles) {
+  DroppedFiles?.forEach((file) => {
+    if (file.type.slice(0, 6) !== "image/") {
+      errorMessage.value = "Invalid file type";
+      return;
+    }
+    if (file.size > 1024 * 1024 * 10) {
+      errorMessage.value = "File is too big";
+      return;
+    }
+    fileData.value.push({
+      file,
+      url: useObjectUrl(file).value ?? "",
+    });
+  });
 }
 
-function handleClickDeleteFile(e, index) {
-  state.files.splice(index, 1);
-  e.preventDefault();
-}
+const clearChanges = () => {
+  fileData.value = fileData.value.filter((item) => item.id);
+  emit("update:modelValue", fileData.value);
+  emit("closeModal");
+};
 
-const iProps = getInputProps();
+// Watch for file changes
+watch(files, (selectedFiles) => {
+  if (!selectedFiles) return;
 
-iProps.accept = props.accept || "*";
+  for (const file of selectedFiles) {
+    if (file.type.slice(0, 6) !== "image/") {
+      errorMessage.value = "Invalid file type";
+      return;
+    }
+    if (file.size > 1024 * 1024 * 10) {
+      errorMessage.value = "File is too big";
+      return;
+    }
+
+    if (errorMessage.value) {
+      errorMessage.value = null;
+    }
+
+    fileData.value.push({
+      file,
+      url: useObjectUrl(file).value ?? "",
+    });
+  }
+  emit("update:modelValue", fileData.value);
+});
+
+useDropZone(dropZoneRef, onDrop);
 </script>
 
+
 <template>
-  <div>
-    <!--
- <div v-if="state.files.length > 0" class="files">
-      <div class="file-item" v-for="(file, index) in state.files" :key="index">
-        <span>{{ file.name }}</span>
-        <span class="delete-file" @click="handleClickDeleteFile(index)"
-          >Delete</span
+  <div class="flex position-relative">
+    <div class="w-full h-auto relative">
+      <div ref="dropZoneRef" class="cursor-pointer" @click="() => open()">
+        <div
+          v-if="fileData.length <= 0"
+          class="d-flex flex-column justify-center align-center gap-y-2 pa-12 drop-zone rounded"
         >
+          <IconBtn variant="tonal" class="rounded-sm">
+            <VIcon icon="tabler-upload" />
+          </IconBtn>
+          <h4 class="text-h4">Drag and drop your image here.</h4>
+          <span class="text-disabled">or</span>
+
+          <VBtn variant="tonal" size="small"> Browse Images </VBtn>
+        </div>
+
+        <div
+          v-else
+          class="d-flex justify-center align-center gap-3 pa-8 drop-zone flex-wrap"
+        >
+          <VRow class="match-height w-100 pt-10">
+            <template v-for="(item, index) in fileData" :key="index">
+              <VCol cols="12" sm="4">
+                <VCard :ripple="false" border>
+                  <VCardText class="d-flex flex-column" @click.stop>
+                    <VImg
+                      :src="item?.url ?? item.original_url"
+                      width="200px"
+                      height="150px"
+                      class="w-100 mx-auto"
+                    />
+                    <div class="mt-2">
+                      <span class="clamp-text text-wrap">
+                        {{ item.file?.name ?? item.name }}
+                      </span>
+                      <span>
+                        {{ item.file?.size ?? item.size / 1000 }} KB
+                      </span>
+                    </div>
+                  </VCardText>
+                  <VCardActions>
+                    <VBtn
+                      variant="text"
+                      block
+                      @click.stop="fileData.splice(index, 1)"
+                    >
+                      Remove File
+                    </VBtn>
+                  </VCardActions>
+                </VCard>
+              </VCol>
+            </template>
+
+            <VCol cols="12" sm="4">
+              <VCard :ripple="false" class="border-dotted d-flex">
+                <VIcon icon="tabler-plus" size="60" class="mx-auto my-auto" />
+              </VCard>
+            </VCol>
+          </VRow>
+        </div>
+        <span class="text-error fs-13 ms-7">{{ errorMessage }}</span>
       </div>
-    </div> 
--->
-    <div class="dropzone">
-      <VRow>
-        <VCol
-          class="text-center"
-          md="3"
-          :key="index"
-          v-for="(file, index) in state.files"
-        >
-          <div v-if="file.type.includes('image')">
-            <img :src="file.preview" width="120" height="160" />
-            <div class="dz-filename">{{ file.name }}</div>
-            <div class="">{{ (file.size / (1024 * 1024)).toFixed(2) }} MB</div>
-          </div>
-          <div v-else>
-            <VIcon
-              class="file-icon"
-              icon="tabler-file-import"
-              width="120"
-              height="160"
-            />
-          </div>
-          <VBtn
-            size="x-small"
-            color="error"
-            @click="(e) => handleClickDeleteFile(e, index)"
-          >
-            Delete
-          </VBtn>
-        </VCol>
-      </VRow>
-      <VRow v-bind="getRootProps()" v-if="multiple || (!multiple && state.files.length == 0)">
-        <VCol>
-          <div class="relative">
-            <div
-              class="cursor"
-              :class="{
-                isDragActive,
-              }"
-            >
-              <input
-                v-bind="iProps"
-                :accept="accept"
-              />
-              <div>
-                <p v-if="isDragActive" class="dz-message">
-                  Drop the files here ...
-                </p>
-                <p v-else class="dz-message">
-                  Drop files here or click to upload
-                </p>
-              </div>
-            </div>
-          </div>
-        </VCol>
-      </VRow>
+      <slot name="caption" />
+    
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.cursor {
-  cursor: pointer;
+.drop-zone {
+  border: 1px dashed rgba(var(--v-theme-on-surface), var(--v-border-opacity));
 }
 
-.relative {
-  position: relative;
+.close-btn {
+  top: 10px;
+  right: 10px;
+  z-index: 9;
 }
-
-.dropzone,
-.files {
-  min-height: 300px;
-  border: 2px dashed #dbdade;
+.error-message {
+  color: red;
 }
-
-.dz-message {
-  margin: 8rem 0 3rem;
-  color: #5d596c;
-  font-size: 1.625rem;
-  font-weight: 500;
-  text-align: center;
-}
-.dz-message::before {
-  background: rgb(75 70 92 / 8%);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-upload' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='%235d596c' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2' /%3E%3Cpolyline points='7 9 12 4 17 9' /%3E%3Cline x1='12' y1='4' x2='12' y2='16' /%3E%3C/svg%3E") !important;
-  position: absolute;
-  top: -4rem;
-  left: calc(50% - 22px);
-  display: inline-block;
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  content: "";
-}
-
-.dz-filename {
-  overflow: hidden;
-  width: 100%;
-  padding: 0.625rem 0.625rem 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.dropzone {
-  position: relative;
-  width: 100%;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-}
-
-.dz-details {
-  width: 100%;
-}
-
-.file-icon {
-  width: 120px;
-  height: 160px;
+.border-dotted {
+  border: 3px dotted rgba(var(--v-theme-on-surface), var(--v-border-opacity));
 }
 </style>
