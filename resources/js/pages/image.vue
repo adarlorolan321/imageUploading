@@ -1,5 +1,5 @@
 <script setup>
-import Dropzone from '../@core/components/Dropzone.vue';
+import Dropzone from '../components/global/Dropzone.vue';
 import { ref } from 'vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { VBtn } from 'vuetify/components'; // Ensure Vuetify components are properly imported
